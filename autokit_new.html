@@ -39,12 +39,13 @@
 			bdlBase = cdnAddr + "dl/Bundles/" + "3.4.5" + "/Kor/AssetBundles/Android/";
 			poolBase = cdnAddr + "dl/pool/AssetBundles/";
 			let manifestUrl = manifestBase + "manifest/manifest_assetmanifest";
+			const text = await getManifestContent(manifestUrl);
+			document.querySelector('#content').innerText = text;
 		}
 		async function getManifestContent(manifestUrl) {
 			const resp = await fetch('https://cors-anywhere.herokuapp.com/' + manifestUrl);
 			const text = await resp.text();
-			document.querySelector('#content').innerText = text;
-			}
+			return text; 
 		}
 
 
