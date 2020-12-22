@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>test</title>
+	<title>autokit</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script>
 	  	jQuery( document ).ready( function( $ ) {
@@ -39,45 +39,12 @@
 			bdlBase = cdnAddr + "dl/Bundles/" + "3.4.5" + "/Kor/AssetBundles/Android/";
 			poolBase = cdnAddr + "dl/pool/AssetBundles/";
 			let manifestUrl = manifestBase + "manifest/manifest_assetmanifest";
-
-			console.log(manifestUrl);
-			//const resp = await fetch(manifestUrl);
 		}
-
-		function getContents(evt) {
-			var fr = new FileReader();
-			var files = evt.target.files;
-			fr.onload = function() {
-				result = fr.result;
-				result.split("\n").forEach(
-					element => {
-						if (element.includes("bdl_")) {
-							console.log(bdlBase + element.split(",")[0])
-						} else {
-							console.log(manifestBase + element.split(",")[0])
-						}
-					}
-				);
-				$("#content").text(result);
-
+		async function getManifestContent(manifestUrl) {
+			const resp = await fetch('https://cors-anywhere.herokuapp.com/' + manifestUrl);
+			const text = await resp.text();
+			document.querySelector('#content').innerText = text;
 			}
-			fr.readAsText(files[0]);
-		}
-
-		function getHash(evt) {
-			var fr = new FileReader();
-			var files = evt.target.files;
-			fr.onload = function () {
-				poolResult = fr.result;
-				poolResult.split("\n").forEach(
-					element => {
-						const hash = element.split(",")[1];
-						console.log(poolBase + hash.slice(0, 2) + "/" + hash);
-					}
-				);
-				$("#poolText").text(poolResult);
-			}
-			fr.readAsText(files[0]);
 		}
 
 
