@@ -34,7 +34,7 @@
 		  	$("#serverName").text(cdnAddr);
 		}
 
-		function getManifest(guess) {
+		async function getManifest(guess) {
 			manifestBase = cdnAddr + "dl/Resources/" + guess + "/Kor/AssetBundles/Android/";
 			bdlBase = cdnAddr + "dl/Bundles/" + "3.4.5" + "/Kor/AssetBundles/Android/";
 			poolBase = cdnAddr + "dl/pool/AssetBundles/";
